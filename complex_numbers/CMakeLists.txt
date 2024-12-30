@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.12)
+set(CMAKE_CXX_STANDARD 17)
+project(complex_numbers)
+add_library(complex_numbers complex_num.cpp)
+target_include_directories(complex_numbers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
