@@ -14,16 +14,18 @@ Complex& Complex::operator-=(const Complex& other) noexcept {
     return *this;
 }
 
-Complex& Complex::operator*=(const Complex& other) noexcept{
+Complex& Complex::operator*=(const Complex& other) noexcept {
+    double temp_re = re;
     re = re * other.re - im * other.im;
-    im = re * other.im + im * other.re;
+    im = temp_re * other.im + im * other.re;
     return *this;
 }
 
 Complex& Complex::operator/=(const Complex& other) {
     if (other.re == 0 && other.im == 0) { throw std::runtime_error("Division by zero"); }
+    double temp_re = re;
     re = (re * other.re + im * other.im) / (other.re * other.re + other.im * other.im);
-    im = (im * other.re - re * other.im) / (other.re * other.re + other.im * other.im);
+    im = (im * other.re - temp_re * other.im) / (other.re * other.re + other.im * other.im);
     return *this;
 }
 
