@@ -1,0 +1,3 @@
+[submodule "matrix"]
+	path = matrix
+	url = https://git.miem.hse.ru/LR_21/matrix.git
