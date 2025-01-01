@@ -1,4 +1,6 @@
 #pragma once
+#include <ostream>
+#include <istream>
 
 class Complex {
     public: // Constructors
@@ -23,3 +25,6 @@ Complex operator/(Complex& lhs, const Complex& rhs);
 // Comparison operators
 bool operator==(const Complex& lhs, const Complex& rhs) noexcept;
 bool operator!=(const Complex& lhs, const Complex& rhs) noexcept;
+// Output and input operators
+std::ostream& operator<<(std::ostream& out, const Complex& num);
+std::istream& operator>>(std::istream& in, Complex& num);
