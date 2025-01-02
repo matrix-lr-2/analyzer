@@ -63,19 +63,21 @@ bool operator!=(const Complex& lhs, const Complex& rhs) noexcept {
 }
 
 std::ostream& operator<<(std::ostream& out, const Complex& num) {
+    std::stringstream sout;
     if (num.im == 0) {
-        out << num.re;
+        sout << num.re;
     }
     else if (num.re == 0) {
-        if (num.im == 1) { out << "i"; }
-        else if (num.im == -1) { out << "-i"; }
-        else out << num.im << "i";
+        if (num.im == 1) { sout << "i"; }
+        else if (num.im == -1) { sout << "-i"; }
+        else sout << num.im << "i";
     }
     else {
-        out << num.re;
-        if (num.im > 0) { out << "+" << num.im << "i"; }
-        else out << num.im << "i";
+        sout << num.re;
+        if (num.im > 0) { sout << "+" << num.im << "i"; }
+        else sout << num.im << "i";
     }
+    out << sout.str();
     return out;
 }
 
