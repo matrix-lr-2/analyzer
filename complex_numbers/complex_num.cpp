@@ -108,7 +108,7 @@ std::istream& operator>>(std::istream& in, Complex& num) {
     try {
         std::string input;
         in >> input;
-        if (input.empty() || input.find_first_not_of("+-0123456789i") != std::string::npos) { throw std::runtime_error(""); }
+        if (input.empty() || input.find_first_not_of(".+-0123456789i") != std::string::npos) { throw std::runtime_error(""); }
         size_t pos = input.find('i');
         if (pos == std::string::npos) {
             if (input.find_first_of("+-",  1) != std::string::npos) { throw std::runtime_error(""); }
