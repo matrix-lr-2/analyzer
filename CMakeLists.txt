@@ -1,7 +1,7 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
 set(CMAKE_CXX_STANDARD 17)
 project(ComplexMatrixAnalyzer)
-add_executable(ComplexMatrixAnalyzer source/main.cpp source/procedure.cpp)
+add_executable(ComplexMatrixAnalyzer source/main.cpp source/procedures.cpp)
 add_subdirectory(matrix)
 add_subdirectory(complex_numbers)
 target_link_libraries(ComplexMatrixAnalyzer PUBLIC matrix)

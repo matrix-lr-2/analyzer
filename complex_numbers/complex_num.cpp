@@ -1,5 +1,4 @@
 #include <complex_num.h>
-#include <stdexcept>
 #include <limits>
 #include <sstream>
 
@@ -92,12 +91,14 @@ static size_t find_sign_pos(const std::string& input) {
 }
 
 static bool string_to_complex_num(Complex& num, const std::string& input, const size_t& pos) {
-    num.re = std::stod(input.substr(0, pos));
+    Complex tmp;
+    tmp.re = std::stod(input.substr(0, pos));
     std::string sub_str_im = input.substr(pos);
     if (sub_str_im.find_first_of("+-",  1) != std::string::npos) { return false; }
-    if (sub_str_im == "+" || sub_str_im == "-") { num.im = std::stod(sub_str_im + "1"); }
-    else if (sub_str_im == "-0") { num.im = 0; }
-    else { num.im = std::stod(sub_str_im); }
+    if (sub_str_im == "+" || sub_str_im == "-") { tmp.im = std::stod(sub_str_im + "1"); }
+    else if (sub_str_im == "-0") { tmp.im = 0; }
+    else { tmp.im = std::stod(sub_str_im); }
+    num = tmp;
     return true;
 }
 
@@ -109,21 +110,24 @@ std::istream& operator>>(std::istream& in, Complex& num) {
         size_t pos = input.find('i');
         if (pos == std::string::npos) {
             if (input.find_first_of("+-",  1) != std::string::npos) { throw std::runtime_error(""); }
-            num.re = std::stod(input);
+            double re = std::stod(input);
             num.im = 0;
+            num.re = re;
             return in;
         }
         if (pos != input.length() -1) { throw std::runtime_error(""); }
         input.pop_back();
         if (input.empty() || input == "+" || input == "-") {
-            num.im = std::stod(input + "1");
+            double im = std::stod(input + "1");
             num.re = 0;
+            num.im = im;
             return in;
         }
         pos = find_sign_pos(input);
         if (pos == std::string::npos) {
-            num.im = std::stod(input);
+            double im = std::stod(input);
             num.re = 0;
+            num.im = im;
             return in;
         }
         if (!string_to_complex_num(num, input, pos)) { throw std::runtime_error(""); }

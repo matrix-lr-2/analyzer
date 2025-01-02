@@ -18,13 +18,17 @@ class Complex {
 };
 
 // Math operators
-Complex operator+(Complex& lhs, const Complex& rhs) noexcept;
-Complex operator-(Complex& lhs, const Complex& rhs) noexcept;
-Complex operator*(Complex& lhs, const Complex& rhs) noexcept;
-Complex operator/(Complex& lhs, const Complex& rhs);
+Complex operator+(const Complex& lhs, const Complex& rhs) noexcept;
+Complex operator-(const Complex& lhs, const Complex& rhs) noexcept;
+Complex operator*(const Complex& lhs, const Complex& rhs) noexcept;
+Complex operator/(const Complex& lhs, const Complex& rhs);
 // Comparison operators
 bool operator==(const Complex& lhs, const Complex& rhs) noexcept;
 bool operator!=(const Complex& lhs, const Complex& rhs) noexcept;
 // Output and input operators
 std::ostream& operator<<(std::ostream& out, const Complex& num);
 std::istream& operator>>(std::istream& in, Complex& num);
+// Math functions
+inline double abs(const Complex& c) {
+    return std::sqrt(c.re * c.re + c.im * c.im);
+}
