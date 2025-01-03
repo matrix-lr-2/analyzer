@@ -53,6 +53,6 @@ Rotation axis: [1, 2, 0]
 Rotation angle (degrees): 180
 ------------------------------------------------------------------------------------------------------------------------
 But sure not all matrices can be analyzed fully programm will show you the reason of it.
-For example: not squared matrices can only support transposition, rank calculation, row reduced echelon form:.
+For example: not squared matrices can only support transposition, rank calculation, row reduced echelon form.
 ------------------------------------------------------------------------------------------------------------------------
 The programm was written in C++.
