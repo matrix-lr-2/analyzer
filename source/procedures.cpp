@@ -75,6 +75,18 @@ linalg::Matrix<Complex> load_matrix(const char* file_path) {
     return matrix;
 }
 
+linalg::Matrix<double> is_double(const linalg::Matrix<Complex>& mat) {
+    if (mat.rows() != 3 || mat.columns() != 3) { throw std::runtime_error("The size of matrix must be 3x3 for the further analysis."); }
+    linalg::Matrix<double> result(3, 3);
+    for (size_t i = 0; i < 9; ++i) {
+        if (mat(i).im != 0) {
+            throw std::runtime_error("Matrix must contain only real numbers for the further analysis.");
+        }
+        result(i) = mat(i).re;
+    }
+    return result;
+}
+
 void analyze(const linalg::Matrix<Complex>& matrix) {
     std::cout << "Transposed matrix:\n" << transpose(matrix) << std::endl;
     std::cout << "Row reduced echelon form:\n" << matrix.reduced_row_echelon_form() << std::endl;
@@ -87,10 +99,18 @@ void analyze(const linalg::Matrix<Complex>& matrix) {
     Complex determinant = matrix.det();
     std::cout << "Determinant: " << determinant << std::endl;
     if (determinant == 0) {
-        std::cout << "Matrix can not be inverted due to zero determinant!" << std::endl;
+        std::cout << "Other analysis is not available due to zero determinant!" << std::endl;
         return;
     }
     std::cout << "\nInverted matrix:\n" << invert(matrix) << std::endl;
+    try {
+        std::tuple<std::string, double, double, double, double> result = is_double(matrix).rotation_3d();
+        std::cout << "Orthogonal transformations:\n";
+        std::cout << "Transformation type: " << std::get<0>(result) << std::endl;
+        std::cout << "Rotation axis: [" << std::get<1>(result) << ", " << std::get<2>(result) << ", " << std::get<3>(result) << "]" << std::endl;
+        std::cout << "Rotation angle (degrees): " << (std::get<4>(result) * 180) / M_PI << std::endl;
+    }
+    catch (const std::exception& exception) { std::cout << exception.what() << std::endl; }
 }
 
 void handle(const std::exception& exception) {
