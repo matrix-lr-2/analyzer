@@ -92,14 +92,14 @@ void analyze(const linalg::Matrix<Complex>& matrix) {
     std::cout << "Row reduced echelon form:\n" << matrix.reduced_row_echelon_form() << std::endl;
     std::cout << "Rank: " << matrix.rank() << std::endl;
     if (matrix.rows() != matrix.columns()) {
-        std::cout << "Other analysis is not available for non-square matrices!" << std::endl;
+        std::cout << "\nOther analysis is not available for non-square matrices!" << std::endl;
         return;
     }
     std::cout << "Trace: " << matrix.trace() << std::endl;
     Complex determinant = matrix.det();
     std::cout << "Determinant: " << determinant << std::endl;
     if (determinant == 0) {
-        std::cout << "Other analysis is not available due to zero determinant!" << std::endl;
+        std::cout << "\nOther analysis is not available due to zero determinant!" << std::endl;
         return;
     }
     std::cout << "\nInverted matrix:\n" << invert(matrix) << std::endl;
@@ -110,7 +110,7 @@ void analyze(const linalg::Matrix<Complex>& matrix) {
         std::cout << "Rotation axis: [" << std::get<1>(result) << ", " << std::get<2>(result) << ", " << std::get<3>(result) << "]" << std::endl;
         std::cout << "Rotation angle (degrees): " << (std::get<4>(result) * 180) / M_PI << std::endl;
     }
-    catch (const std::exception& exception) { std::cout << exception.what() << std::endl; }
+    catch (const std::exception& exception) { std::cout << std::endl << exception.what() << std::endl; }
 }
 
 void handle(const std::exception& exception) {
