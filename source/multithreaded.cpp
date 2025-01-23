@@ -2,6 +2,7 @@
 #include <chrono>
 #include <iostream>
 #include <future>
+#define M_PI        3.14159265358979323846264338327950288
 
 void analyze_multithreaded(const linalg::Matrix<Complex>& matrix) {
     auto transpose_future = std::async(std::launch::async, [&matrix]() {
