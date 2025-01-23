@@ -1,6 +1,7 @@
 #include "procedures.h"
 #include <iostream>
 #include <fstream>
+#define M_PI        3.14159265358979323846264338327950288
 
 const char* parse_arguments(int arg_count, char* arg_vars[]) {
     if (arg_count != 2) {
